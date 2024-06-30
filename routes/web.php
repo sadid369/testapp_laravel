@@ -17,26 +17,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('home', function () {
+   return view('home') ;
+});
 
-Route::get('about',function ()  {
-    return "<h1>About Page</h1>";
+Route::get('about', function () {
+    $about="this is a About Page";
+    $about2="this is a About Page 2";
+    return view('about',['about'=>$about,"about2"=>$about2 ]);
 })->name('a');
 
 Route::get('contact', function () {
-    return "<h1>Contact</h1>";
+    return view('contact');
 });
 
 Route::get('users/{id}', function ($id) {
     return $id;
 })->name('c');
 
-Route::get('home', function () {
-    return "<a href='".route('c',1)."'>About</a>";
-});
+// Route::get('home', function () {
+//     return "<a href='" . route('c', 1) . "'>About</a>";
+// });
 
 
 
-Route::group(["prefix"=>"customer"],function () {
+Route::group(["prefix" => "customer"], function () {
     Route::get('/', function () {
         return "<h1>Customer</h1>";
     });
@@ -47,6 +52,7 @@ Route::group(["prefix"=>"customer"],function () {
         return "<h1>Customer Show</h1>";
     });
 });
+
 
 
 Route::fallback(function () {
